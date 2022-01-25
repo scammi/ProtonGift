@@ -16,5 +16,9 @@
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.5.3",
     "hardhat": "^2.8.3"
+  },
+  "dependencies": {
+    "@charged-particles/protocol-subgraph": "github:Charged-Particles/charged-particles-subgraph",
+    "dotenv": "^14.3.0"
   }
 }
