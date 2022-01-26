@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-
 const { ethers } = require("ethers");
 const kovanAddresses = require('@charged-particles/protocol-subgraph/networks/kovan');
 const prontonAbi =  require('@charged-particles/protocol-subgraph/abis/Proton');
@@ -15,8 +14,8 @@ const fs = require('fs');
   // init addresses
   const walletMnemonic = new ethers.Wallet.fromMnemonic(process.env.MNEMONIC)
   const myWallet = walletMnemonic.connect(provider)
-  const receiptWallet = ethers.Wallet.createRandom();
-  const receiptWalletAddress = receiptWallet.address;
+  const recipientWallet = ethers.Wallet.createRandom();
+  const recipientWalletAddress = recipientWallet.address;
 
   // init contracts
   const protonContract = new ethers.Contract(kovanAddresses.proton.address, prontonAbi, provider);
@@ -61,20 +60,21 @@ const fs = require('fs');
   // transfer
   const transfer = await protonContract.connect(myWallet).transferFrom(
    myWallet.address,
-   receiptWalletAddress,
+   recipientWalletAddress,
    newProtonId.toNumber()
   )
   await transfer.wait();
   console.log('New owner set \n');
 
-  //get state
+  // get state
   const timeLockState = await chargeStateContract.connect(myWallet).getReleaseTimelockExpiry(kovanAddresses.proton.address, newProtonId.toNumber());
   console.log('Time lock for: ',timeLockState.toNumber(), '\n');
   
   const newOwner = await protonContract.creatorOf(newProtonId.toNumber());
   console.log("New owner", newOwner);
 
-  fs.writeFile('receiptWalletPK.txt', String(receiptWallet.privateKey) , function (err) {
+  // Write recipient wallet
+  fs.writeFile('recipientWalletPK.txt', String(recipientWallet.privateKey) , function (err) {
     if (err) return console.log(err);
     console.log('Saved private key... ');
   });
