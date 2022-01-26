@@ -1,4 +1,4 @@
-# Proton lock present
+# Proton lock new born present
 
 ### Node script that creates, funds, locks and transfers a Proton NFT. 
 

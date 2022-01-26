@@ -38,7 +38,7 @@ const fs = require('fs');
   await newProtonTrx.wait();
   console.log('Proton created \n');
 
-  // charge 
+  // charge // TODO: be able to charge particle !
   // const deposit = await genericWalletManagerContract.connect(myWallet).energize(
   //   kovanAddresses.proton.address,
   //   11,
@@ -52,7 +52,7 @@ const fs = require('fs');
   const lock = await chargeStateContract.connect(myWallet).setReleaseTimelock(
     kovanAddresses.proton.address,
     newProtonId.toNumber(),
-    99483079
+    99483079 // TODO: calculate block in the future
   );
   await lock.wait();
   console.log('Proton locked \n');
