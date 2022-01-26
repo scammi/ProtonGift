@@ -11,6 +11,6 @@ They must be patient, and wait for the lock to open.
 
 ### Use case
 
-Present for a new born, the locked assets will be lock until the child's 15th birthday.
+Present for a new born, the locked assets will wait until the child's 15th birthday.
 
 
